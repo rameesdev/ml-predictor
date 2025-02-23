@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Admission Predictor</title>
+    <script>
+        async function predict() {
+            const income = parseInt(document.getElementById('income').value);
+            const sgpa = parseFloat(document.getElementById('sgpa').value);
+            const district = document.getElementById('district').value;
+            const category = document.getElementById('category').value;
+            const gender = document.getElementById('gender').value;
+            const semester = document.getElementById('semester').value;
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ income, sgpa, district, category, gender, semester })
+            });
+
+            const result = await response.json();
+            document.getElementById('result').innerText = `Total Score: ${result.total_score}\nPredicted Percentage: ${result.predicted_percentage.toFixed(2)}%\nApproval Prediction: ${result.approval_prediction}`;
+        }
+    </script>
+</head>
+<body>
+    <h2>Hostel Admission Prediction</h2>
+    
+    <label for="income">Family Income:</label>
+    <input type="number" id="income" required><br>
+    
+    <label for="sgpa">SGPA:</label>
+    <input type="number" step="0.01" id="sgpa" required><br>
+    
+    <label for="district">District:</label>
+    <select id="district">
+        <option value="Trivandrum">Trivandrum</option>
+        <option value="Kollam">Kollam</option>
+        <option value="Pathanamthitta">Pathanamthitta</option>
+        <option value="Alappuzha">Alappuzha</option>
+        <option value="Kottayam">Kottayam</option>
+        <option value="Idukki">Idukki</option>
+        <option value="Ernakulam">Ernakulam</option>
+        <option value="Trichur">Trichur</option>
+        <option value="Palakkad">Palakkad</option>
+        <option value="Malappuram">Malappuram</option>
+        <option value="Calicut">Calicut</option>
+        <option value="Kannur">Kannur</option>
+        <option value="Kasaragod">Kasaragod</option>
+        <option value="Wayanad">Wayanad</option>
+    </select><br>
+    
+    <label for="category">Category:</label>
+    <select id="category">
+        <option value="SC">SC</option>
+        <option value="ST">ST</option>
+        <option value="OBC">OBC</option>
+        <option value="GENERAL">GENERAL</option>
+        <option value="BPL">BPL</option>
+        <option value="OEC">OEC</option>
+    </select><br>
+    
+    <label for="gender">Gender:</label>
+    <select id="gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+    </select><br>
+    
+    <label for="semester">Semester:</label>
+    <select id="semester">
+        <option value="S3">S3</option>
+        <option value="S5">S5</option>
+        <option value="S7">S7</option>
+    </select><br>
+    
+    <button onclick="predict()">Predict</button>
+    
+    <h3>Prediction Result:</h3>
+    <pre id="result"></pre>
+</body>
+</html>
