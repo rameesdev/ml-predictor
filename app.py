@@ -34,7 +34,7 @@ def get_income_weightage(income):
 DISTANCE_WEIGHTAGE = {
     "Trivandrum": 20, "Kollam": 17.5, "Pathanamthitta": 16.6667, "Alappuzha": 13.75,
     "Kottayam": 14.5833, "Idukki": 14.79167, "Ernakulam": 11.6667, "Trichur": 9.16667,
-    "Palakkad": 8.54167, "Malappuram": 7.5, "Calicut": 4.16667, "Kannur": 3.33333,
+    "Palakkad": 8.54167, "Malappuram": 7.5, "Kozhikode": 4.16667, "Kannur": 3.33333,
     "Kasaragod": 7.08333, "Wayanad": 1
 }
 
